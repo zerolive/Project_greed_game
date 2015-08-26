@@ -107,19 +107,18 @@ while bestscore <= 2999
 		end
 		#calculando el valor de las tiradas
 		calculando = Calc.new
-		scoreplayers[(jugador -1)] = calculando.sum(dados)
+		scoreplayers[(jugador -1)] += calculando.sum(dados)
 		jugador += 1
 	end
 	bestscore = scoreplayers.max
 	round += 1
-	p bestscore
 	p "#{scoreplayers.map { |i| "'" + i.to_s + "'" }.join(",")}"
 end
 
 #pidiendo últimas tiradas de cada jugador
 jugador = 1
+p "LAST ROLLS"
 while jugador <= numberplayers
-	p "LAST ROLLS"
 	#comprobando que jugador no tiene que tirar
 	if scoreplayers[(jugador -1)] != bestscore
 		tirada = 0
@@ -129,11 +128,19 @@ while jugador <= numberplayers
 			preguntando = Ask.new
 			dados[tirada] = preguntando.question(jugador, (tirada+1))
 			tirada += 1
+			p "#{dados.map { |i| "'" + i.to_s + "'" }.join(",")}"
 		end
 		#calculando el valor de las tiradas
 		calculando = Calc.new
-		scoreplayers[(jugador -1)] = calculando.sum(dados)
+		scoreplayers[(jugador -1)] += calculando.sum(dados)
 		jugador += 1
 	end
 	jugador +=1
+end
+
+p "#{scoreplayers.map { |i| "'" + i.to_s + "'" }.join(",")}"
+#Mostrando la tabla de puntuaciones.
+p "SCORE TABLE"
+scoreplayers.each_with_index do |values, index|
+p "Player #{(index+1)} has #{values}"
 end
