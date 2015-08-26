@@ -31,15 +31,15 @@ class Calc
 			score += 1200
 		end
 		#calculando los 2
-		if number[1] == 3
+		if number[1] >= 3
 			score += 200
 		end
 		#calculando los 3
-		if number[2] == 3
+		if number[2] >= 3
 			score += 300
 		end
 		#calculando los 4
-		if number[3] == 3
+		if number[3] >= 3
 			score += 400
 		end
 		#calculando los 5
@@ -55,9 +55,12 @@ class Calc
 			score += 600
 		end
 		#calculando los 6
-		if number[5] == 3
+		if number[5] >= 3
 			score += 600
 		end
 	return score
 	end
 end
+
+prueba = Calc.new
+p prueba.sum([2, 2, 2, 2, 2])

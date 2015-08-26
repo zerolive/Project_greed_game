@@ -32,15 +32,15 @@ class Calc
 			score += 1200
 		end
 		#calculando los 2
-		if number[1] == 3
+		if number[1] >= 3
 			score += 200
 		end
 		#calculando los 3
-		if number[2] == 3
+		if number[2] >= 3
 			score += 300
 		end
 		#calculando los 4
-		if number[3] == 3
+		if number[3] >= 3
 			score += 400
 		end
 		#calculando los 5
@@ -56,7 +56,7 @@ class Calc
 			score += 600
 		end
 		#calculando los 6
-		if number[5] == 3
+		if number[5] >= 3
 			score += 600
 		end
 	return score
@@ -82,25 +82,58 @@ p "WELCOME TO GREED GAME"
 numberplayers = 0
 while (numberplayers <=1) || (numberplayers >= 6)
 	p "Please insert number uf players (Between 2 and 5):"
-	numberplayers = gets.chomp.to_i
+	respuesta = gets.chomp.to_i
+	numberplayers = respuesta.to_i
 end
 
 #Pidiendo las tiradas.
 bestscore = 0
 scoreplayers = [0, 0, 0, 0, 0]
-
-while bestscore <= 3000
+round = 1
+#comprovando si alguien llega a los 3000 puntos
+while bestscore <= 2999
+	p "ROUND #{round} STARTS!"
 	jugador = 1
 	#Pidiendo las tiradas de cada jugador.
-	while jugador <= numberplayers.to_i
-		tirada = 1
+	while jugador <= numberplayers
+		tirada = 0
 		dados = [0, 0, 0, 0, 0]
 		#Pidiendo las tiradas por separado.
-		while tirada <= 5
+		while tirada <= 4
 			preguntando = Ask.new
-			dados[tirada] = preguntando.question(jugador, tirada)
+			dados[tirada] = preguntando.question(jugador, (tirada+1))
 			tirada += 1
+			p "#{dados.map { |i| "'" + i.to_s + "'" }.join(",")}"
 		end
+		#calculando el valor de las tiradas
+		calculando = Calc.new
+		scoreplayers[(jugador -1)] = calculando.sum(dados)
 		jugador += 1
 	end
+	bestscore = scoreplayers.max
+	round += 1
+	p bestscore
+	p "#{scoreplayers.map { |i| "'" + i.to_s + "'" }.join(",")}"
+end
+
+#pidiendo últimas tiradas de cada jugador
+jugador = 1
+while jugador <= numberplayers
+	p "LAST ROLLS"
+	#comprobando que jugador no tiene que tirar
+	if scoreplayers[(jugador -1)] != bestscore
+		tirada = 0
+		dados = [0, 0, 0, 0, 0]
+		#Pidiendo las tiradas por separado.
+		while tirada <= 4
+			preguntando = Ask.new
+			dados[tirada] = preguntando.question(jugador, (tirada+1))
+			tirada += 1
+		end
+		#calculando el valor de las tiradas
+		calculando = Calc.new
+		scoreplayers[(jugador -1)] = calculando.sum(dados)
+		jugador += 1
+	end
+	jugador +=1
 end
