@@ -103,7 +103,7 @@ while bestscore <= 2999
 			preguntando = Ask.new
 			dados[tirada] = preguntando.question(jugador, (tirada+1))
 			tirada += 1
-			p "#{dados.map { |i| "'" + i.to_s + "'" }.join(",")}"
+			#p "#{dados.map { |i| "'" + i.to_s + "'" }.join(",")}"
 		end
 		#calculando el valor de las tiradas
 		calculando = Calc.new
@@ -112,7 +112,7 @@ while bestscore <= 2999
 	end
 	bestscore = scoreplayers.max
 	round += 1
-	p "#{scoreplayers.map { |i| "'" + i.to_s + "'" }.join(",")}"
+	#p "#{scoreplayers.map { |i| "'" + i.to_s + "'" }.join(",")}"
 end
 
 #pidiendo últimas tiradas de cada jugador
@@ -128,7 +128,7 @@ while jugador <= numberplayers
 			preguntando = Ask.new
 			dados[tirada] = preguntando.question(jugador, (tirada+1))
 			tirada += 1
-			p "#{dados.map { |i| "'" + i.to_s + "'" }.join(",")}"
+			#p "#{dados.map { |i| "'" + i.to_s + "'" }.join(",")}"
 		end
 		#calculando el valor de las tiradas
 		calculando = Calc.new
@@ -138,7 +138,7 @@ while jugador <= numberplayers
 	jugador +=1
 end
 
-p "#{scoreplayers.map { |i| "'" + i.to_s + "'" }.join(",")}"
+#p "#{scoreplayers.map { |i| "'" + i.to_s + "'" }.join(",")}"
 #Mostrando la tabla de puntuaciones.
 p "SCORE TABLE"
 scoreplayers.each_with_index do |values, index|
