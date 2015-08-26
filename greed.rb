@@ -69,7 +69,8 @@ class Ask
 		number = 0
 		while (number <= 0) || (number >= 7)
 			p "Insert from Player #{player.to_s} roll #{roll.to_s} (Insert a number between 1 and 6)"
-			number = gets.chomp.to_i
+			respuesta = gets.chomp
+			number = respuesta.to_i
 		end
 		return number
 	end
@@ -89,17 +90,17 @@ bestscore = 0
 scoreplayers = [0, 0, 0, 0, 0]
 
 while bestscore <= 3000
-	turn = 1
+	jugador = 1
 	#Pidiendo las tiradas de cada jugador.
-	while turn <= numberplayers
-		dice = 1
+	while jugador <= numberplayers.to_i
+		tirada = 1
 		dados = [0, 0, 0, 0, 0]
 		#Pidiendo las tiradas por separado.
-		while dice <= 5
+		while tirada <= 5
 			preguntando = Ask.new
-			dados[dice] = preguntando.question(turn, dice)
-			dice += 1
+			dados[tirada] = preguntando.question(jugador, tirada)
+			tirada += 1
 		end
-		turn += 1
+		jugador += 1
 	end
 end
